@@ -1,3 +1,4 @@
+import 'package:cinexa/constants.dart';
 import 'package:cinexa/screens/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class MovieTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(context, MovieDetailScreen.routeName);

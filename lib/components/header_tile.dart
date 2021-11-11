@@ -1,3 +1,4 @@
+import 'package:cinexa/constants.dart';
 import 'package:flutter/material.dart';
 
 class HeaderTile extends StatelessWidget {
@@ -12,29 +13,26 @@ class HeaderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 16),
+      padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Row(
         children: [
-          Expanded(
+          Text(
+            leadingText,
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+          ),
+          Spacer(),
+          TextButton(
             child: Text(
-              "Popular",
-              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                    fontWeight: FontWeight.bold,
+              trailingText,
+              style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    fontSize: 14,
+                    color: Colors.blue,
                   ),
             ),
-          ),
-          Spacer(flex: 4),
-          Expanded(
-            child: TextButton(
-              child: Text(
-                "See all",
-                style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
-                    ),
-              ),
-              onPressed: () {},
-            ),
+            onPressed: () {},
           ),
         ],
       ),

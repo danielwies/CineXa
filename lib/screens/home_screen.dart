@@ -1,8 +1,10 @@
-import 'package:cinexa/components/header_tile.dart';
-import 'package:cinexa/components/movie_tile.dart';
+import 'package:cinexa/components/selected_movie_view.dart';
+import 'package:cinexa/constants.dart';
 import 'package:cinexa/design/theme_switch.dart';
+import 'package:cinexa/models/movies/popular_movies.dart';
+import 'package:cinexa/models/movies/top_rated_movies.dart';
+import 'package:cinexa/models/movies/upcoming_movies.dart';
 import 'package:cinexa/service/fetch_movies.dart';
-import 'package:cinexa/models/movies/movie_types.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,11 +19,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<PopularMovie>> popularMovies;
+  late Future<List<TopRatedMovie>> topRatedMovies;
+  late Future<List<UpcomingMovie>> upcomingMovies;
+
   bool _darkTheme = true;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     popularMovies = fetchPopularMovies();
+    topRatedMovies = fetchTopRatedMovies();
+    upcomingMovies = fetchUpcomingMovies();
     checkIfDarkmodeEnabled();
     super.initState();
   }
@@ -33,37 +41,43 @@ class _HomeScreenState extends State<HomeScreen> {
         iconTheme: IconTheme.of(context).copyWith(),
         automaticallyImplyLeading: false,
         title: appBarWidget(context),
-        shadowColor: Colors.grey,
+        shadowColor: Colors.redAccent,
       ),
-      body: Column(
-        children: [
-          HeaderTile(leadingText: "Popular", trailingText: "See all"),
-          Container(
-            height: 270,
-            child: FutureBuilder(
-              future: popularMovies,
-              builder: (context, AsyncSnapshot<List<PopularMovie>> snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      PopularMovie popularMovie = snapshot.data![index];
-                      return MovieTile(
-                        movieTitle: popularMovie.title!,
-                        urlToImg: popularMovie.posterPath!,
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return Center(child: const CircularProgressIndicator());
-              },
-            ),
-          )
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            MovieView(moviesToShow: popularMovies, category: "Popular"),
+            SizedBox(height: 10),
+            MovieView(moviesToShow: topRatedMovies, category: "Top Rated"),
+            SizedBox(height: 10),
+            MovieView(moviesToShow: upcomingMovies, category: "Upcoming"),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        // type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: true,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.movie),
+            label: 'Movies',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.tv),
+            label: 'TV Shows',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Library',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: kPrimaryColor,
+        onTap: _onItemTapped,
       ),
     );
   }
@@ -94,6 +108,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   void toggleSelect(bool selectValue) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -101,8 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
       selectValue
           ? prefs.setBool("darkTheme", false)
           : prefs.setBool("darkTheme", true);
-      print("DARKMODE ENABLED: $_darkTheme");
-
       Provider.of<ThemeSwitchProvider>(context, listen: false).swapTheme();
     });
   }

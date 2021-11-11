@@ -8,7 +8,12 @@ class ThemeSwitchProvider extends ChangeNotifier {
   SharedPreferences? prefs;
 
   ThemeData light = ThemeData.light().copyWith(
-    // primaryColor: Colors.blue,
+    primaryColor: Colors.blue,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedItemColor: kPrimaryColor,
+      unselectedIconTheme: IconThemeData(color: Colors.grey),
+      unselectedItemColor: Colors.grey,
+    ),
     brightness: Brightness.light,
     canvasColor: Colors.white,
     backgroundColor: Colors.blue,
@@ -24,7 +29,13 @@ class ThemeSwitchProvider extends ChangeNotifier {
   );
 
   ThemeData dark = ThemeData.dark().copyWith(
-    // primaryColor: Colors.blue,
+    primaryColor: Colors.blue,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedItemColor: kPrimaryColor,
+      unselectedLabelStyle: TextStyle(color: Colors.black),
+      unselectedIconTheme: IconThemeData(color: Colors.grey),
+      unselectedItemColor: Colors.grey,
+    ),
     brightness: Brightness.dark,
     canvasColor: Colors.black,
     backgroundColor: Colors.blue,
