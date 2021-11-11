@@ -15,15 +15,3 @@ Future<List<PopularMovie>> fetchPopularMovies() async {
       data["results"].map((x) => PopularMovie.fromJson(x)));
   return popularMovies;
 }
-
-Future<List<dynamic>> fetchMovieImages() async {
-  _log.fine("fetching trending movies");
-  final String apiKey = "107770dd1fa37c2b49e4efabdd273506";
-  final params = {"api_key": apiKey};
-  Map<String, dynamic> data =
-      await (getImages("/rjkmN1dniUHVYAtwuV3Tji7FsDO.jpg", params));
-  // log(data.toString());
-  List<PopularMovie> popularMovies = List<PopularMovie>.from(
-      data["results"].map((x) => PopularMovie.fromJson(x)));
-  return popularMovies;
-}

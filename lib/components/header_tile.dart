@@ -18,7 +18,9 @@ class HeaderTile extends StatelessWidget {
           Expanded(
             child: Text(
               "Popular",
-              style: Theme.of(context).textTheme.subtitle2,
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
           Spacer(flex: 4),
@@ -26,10 +28,10 @@ class HeaderTile extends StatelessWidget {
             child: TextButton(
               child: Text(
                 "See all",
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle2!
-                    .apply(color: Colors.blue),
+                style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
               ),
               onPressed: () {},
             ),
