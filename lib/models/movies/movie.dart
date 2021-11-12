@@ -1,23 +1,12 @@
-// To parse this JSON data, do
-//
-//     final movie = movieFromJson(jsonString);
-
-import 'dart:convert';
-
-Movie movieFromJson(String str) => Movie.fromJson(json.decode(str));
-
-String movieToJson(Movie data) => json.encode(data.toJson());
-
 class Movie {
   Movie({
     this.adult,
     this.backdropPath,
-    this.genreIds,
-    this.belongsToCollection,
+    // this.belongsToCollection,
     this.budget,
     this.genres,
     this.homepage,
-    this.id,
+    required this.id,
     this.imdbId,
     this.originalLanguage,
     this.originalTitle,
@@ -40,12 +29,11 @@ class Movie {
 
   bool? adult;
   String? backdropPath;
-  List<int>? genreIds;
-  BelongsToCollection? belongsToCollection;
+  // BelongsToCollection? belongsToCollection;
   int? budget;
   List<Genre>? genres;
   String? homepage;
-  int? id;
+  int id;
   String? imdbId;
   String? originalLanguage;
   String? originalTitle;
@@ -68,9 +56,8 @@ class Movie {
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
-        belongsToCollection:
-            BelongsToCollection.fromJson(json["belongs_to_collection"]),
+        // belongsToCollection:
+        //     BelongsToCollection.fromJson(json["belongs_to_collection"]),
         budget: json["budget"],
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
@@ -103,8 +90,7 @@ class Movie {
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "genre_ids": List<dynamic>.from(genreIds!.map((x) => x)),
-        "belongs_to_collection": belongsToCollection!.toJson(),
+        // "belongs_to_collection": belongsToCollection!.toJson(),
         "budget": budget,
         "genres": List<dynamic>.from(genres!.map((x) => x.toJson())),
         "homepage": homepage,

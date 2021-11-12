@@ -22,7 +22,7 @@ class ThemeSwitchProvider extends ChangeNotifier {
     textTheme: TextTheme(
       subtitle1: TextStyle(color: Colors.black),
       subtitle2: TextStyle(color: Colors.yellow),
-      bodyText2: TextStyle(color: Colors.orange),
+      bodyText2: TextStyle(color: Colors.black),
       headline6: TextStyle(color: Colors.white),
     ),
     iconTheme: IconThemeData(color: Colors.white),
@@ -44,7 +44,7 @@ class ThemeSwitchProvider extends ChangeNotifier {
     textTheme: TextTheme(
       subtitle1: TextStyle(color: Colors.white),
       subtitle2: TextStyle(color: Colors.yellow),
-      bodyText2: TextStyle(color: Colors.orange),
+      bodyText2: TextStyle(color: Colors.white),
       headline6: TextStyle(color: Colors.black),
     ),
     iconTheme: IconThemeData(color: Colors.black),

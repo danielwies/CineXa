@@ -2,8 +2,8 @@ import 'package:cinexa/components/header_tile.dart';
 import 'package:cinexa/components/movie_tile.dart';
 import 'package:flutter/material.dart';
 
-class MovieView extends StatelessWidget {
-  const MovieView(
+class MovieCategoryView extends StatelessWidget {
+  const MovieCategoryView(
       {Key? key, required this.moviesToShow, required this.category})
       : super(key: key);
 
@@ -28,8 +28,8 @@ class MovieView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     dynamic selectedMovieType = snapshot.data![index];
                     return MovieTile(
-                      movieTitle: selectedMovieType.title!,
-                      urlToImg: selectedMovieType.posterPath!,
+                      id: selectedMovieType.id,
+                      posterPath: selectedMovieType.posterPath,
                     );
                   },
                 );
