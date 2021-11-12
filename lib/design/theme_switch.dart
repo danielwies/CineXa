@@ -21,7 +21,7 @@ class ThemeSwitchProvider extends ChangeNotifier {
     scaffoldBackgroundColor: Colors.white,
     textTheme: TextTheme(
       subtitle1: TextStyle(color: Colors.black),
-      subtitle2: TextStyle(color: Colors.yellow),
+      subtitle2: TextStyle(color: Colors.black),
       bodyText2: TextStyle(color: Colors.black),
       headline6: TextStyle(color: Colors.white),
     ),
@@ -43,7 +43,7 @@ class ThemeSwitchProvider extends ChangeNotifier {
     scaffoldBackgroundColor: Colors.black,
     textTheme: TextTheme(
       subtitle1: TextStyle(color: Colors.white),
-      subtitle2: TextStyle(color: Colors.yellow),
+      subtitle2: TextStyle(color: Colors.white),
       bodyText2: TextStyle(color: Colors.white),
       headline6: TextStyle(color: Colors.black),
     ),

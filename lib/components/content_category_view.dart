@@ -1,13 +1,13 @@
 import 'package:cinexa/components/header_tile.dart';
-import 'package:cinexa/components/movie_tile.dart';
+import 'package:cinexa/components/content_tile.dart';
 import 'package:flutter/material.dart';
 
-class MovieCategoryView extends StatelessWidget {
-  const MovieCategoryView(
-      {Key? key, required this.moviesToShow, required this.category})
+class ContentCategoryView extends StatelessWidget {
+  const ContentCategoryView(
+      {Key? key, required this.contentToShow, required this.category})
       : super(key: key);
 
-  final Future<List<dynamic>> moviesToShow;
+  final Future<List<dynamic>> contentToShow;
   final String category;
 
   @override
@@ -18,7 +18,7 @@ class MovieCategoryView extends StatelessWidget {
         Container(
           height: 270,
           child: FutureBuilder(
-            future: moviesToShow,
+            future: contentToShow,
             builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
@@ -26,10 +26,10 @@ class MovieCategoryView extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    dynamic selectedMovieType = snapshot.data![index];
-                    return MovieTile(
-                      id: selectedMovieType.id,
-                      posterPath: selectedMovieType.posterPath,
+                    dynamic selectedContentType = snapshot.data![index];
+                    return ContentTile(
+                      id: selectedContentType.id,
+                      posterPath: selectedContentType.posterPath,
                     );
                   },
                 );

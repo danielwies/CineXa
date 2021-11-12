@@ -3,7 +3,7 @@ import 'package:cinexa/design/theme_switch.dart';
 import 'package:cinexa/models/movies/movie.dart';
 import 'package:cinexa/models/movies/movie_category.dart';
 import 'package:cinexa/screens/tvshows_screen.dart';
-import 'package:cinexa/service/fetch_movies.dart';
+import 'package:cinexa/service/fetch_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,10 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<List<MovieCategory>> topRatedMovies;
   late Future<List<MovieCategory>> upcomingMovies;
   late Future<List<MovieCategory>> nowPlayingMovies;
-
-  FetchMovies? _fetchMovies = FetchMovies();
+  FetchData? _fetchMovies = FetchData();
   Movie? movie;
-
+  String? appBarText;
   bool _darkTheme = true;
   int _selectedIndex = 0;
 
@@ -46,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         iconTheme: IconTheme.of(context).copyWith(),
         automaticallyImplyLeading: false,
         title: appBarWidget(context),
-        shadowColor: Colors.redAccent,
+        // shadowColor: Colors.redAccent,
       ),
       body: body(context),
       bottomNavigationBar: navigationBar(),
@@ -55,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   BottomNavigationBar navigationBar() {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       showUnselectedLabels: true,
       items: [
         BottomNavigationBarItem(
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.list),
-          label: 'Library',
+          label: 'Bookmarks',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget body(BuildContext context) {
     switch (_selectedIndex) {
       case 0:
-        return MovieViewScreen(
+        return MovieView(
           popularMovies: popularMovies,
           topRatedMovies: topRatedMovies,
           upcomingMovies: upcomingMovies,
@@ -101,7 +101,16 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Icon(Icons.movie),
         SizedBox(width: 10),
-        Text("Movies", style: Theme.of(context).textTheme.headline6!),
+        Text(
+          (_selectedIndex == 0)
+              ? "Movies"
+              : (_selectedIndex == 1)
+                  ? "TV Shows"
+                  : (_selectedIndex == 2)
+                      ? "Bookmarks"
+                      : "Search",
+          style: Theme.of(context).textTheme.headline6!,
+        ),
         Spacer(flex: 8),
         Expanded(
           child: IconButton(

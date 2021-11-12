@@ -13,7 +13,7 @@ class HeaderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: EdgeInsets.symmetric(horizontal: kDefaultWidgetPadding),
       child: Row(
         children: [
           Text(

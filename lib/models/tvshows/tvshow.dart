@@ -1,13 +1,3 @@
-// To parse this JSON data, do
-//
-//     final tvShow = tvShowFromJson(jsonString);
-
-import 'dart:convert';
-
-TvShow tvShowFromJson(String str) => TvShow.fromJson(json.decode(str));
-
-String tvShowToJson(TvShow data) => json.encode(data.toJson());
-
 class TvShow {
   TvShow({
     this.backdropPath,
