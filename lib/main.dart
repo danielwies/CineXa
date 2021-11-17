@@ -1,4 +1,5 @@
 import 'package:cinexa/config/movie_cart.dart';
+import 'package:cinexa/config/tvshow_cart.dart';
 import 'package:cinexa/design/theme_switch.dart';
 import 'package:cinexa/screens/favlist.dart';
 import 'package:cinexa/screens/home_screen.dart';
@@ -21,6 +22,9 @@ void main() async {
             ),
             ChangeNotifierProvider(
               create: (context) => MovieCart(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => TvShowCart(),
             ),
           ],
           child: Cinexa(),

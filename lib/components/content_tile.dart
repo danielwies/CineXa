@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ContentTile extends StatelessWidget {
   final String posterPath;
-  final int id;
+  final int? id;
   final String passedCategoryforData;
 
   const ContentTile({

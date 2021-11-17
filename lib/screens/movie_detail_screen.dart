@@ -114,7 +114,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     style:
                                         Theme.of(context).textTheme.subtitle1!),
                                 Text(
-                                  "test",
+                                  movie.voteAverage.toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -138,7 +138,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ),
                         Positioned(
                           right: 0,
-                          child: LikeButton(movie: movie),
+                          child: LikeButton(
+                            movie: movie,
+                            passedCategory: "movie",
+                          ),
                         ),
                       ],
                     );

@@ -10,32 +10,24 @@ final _log = Logger("MovieCart");
 
 class MovieCart extends ChangeNotifier {
   final List<Movie> _movies = [];
-  // final List<TvShow> _tvShows = [];
-
   UnmodifiableListView<Movie> get movies => UnmodifiableListView(_movies);
 
   static const SAVED_MOVIES_KEY = "movie_cart";
-  static const IGNORE_KEY = "ignore_movie_ids";
-
   late SharedPreferences prefs;
 
   MovieCart() {
     loadState();
-    print("loading State");
   }
 
   loadState() async {
     prefs = await SharedPreferences.getInstance();
     _loadMovies();
-    // _loadTvShows();
   }
 
   _loadMovies() {
     final settingString = prefs.getString(SAVED_MOVIES_KEY);
-    print("oh shit, early");
 
     if (settingString == null) {
-      print("oh shit, null");
       return null;
     }
 
@@ -57,7 +49,6 @@ class MovieCart extends ChangeNotifier {
   }
 
   void add(Movie movie) {
-    // _log.fine("Adding Movie to Cart ${movie.title}");
     print("Adding Movie to Cart ${movie.title}");
     _movies.add(movie);
     save();
@@ -65,14 +56,13 @@ class MovieCart extends ChangeNotifier {
   }
 
   void remove(Movie movie) {
-    // _log.fine("Removing Job from Cart ${movie.title}");
     print("Removing Movie from Cart ${movie.title}");
     _movies.removeWhere((element) => element.id == movie.id);
     save();
     notifyListeners();
   }
 
-  bool isLiked(Movie? job) {
-    return _movies.any((element) => element.id == job!.id);
+  bool isLiked(Movie? movie) {
+    return _movies.any((element) => element.id == movie!.id);
   }
 }

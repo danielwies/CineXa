@@ -41,15 +41,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconTheme.of(context).copyWith(),
-        automaticallyImplyLeading: false,
-        title: appBarWidget(context),
-        // shadowColor: Colors.redAccent,
+    return SafeArea(
+      child: Scaffold(
+        // appBar: AppBar(
+        //   iconTheme: IconTheme.of(context).copyWith(),
+        //   automaticallyImplyLeading: false,
+        //   title: appBarWidget(context),
+        //   shadowColor: _darkTheme ? Colors.white : Colors.black,
+        // ),
+        body: body(context),
+        bottomNavigationBar: navigationBar(),
       ),
-      body: body(context),
-      bottomNavigationBar: navigationBar(),
     );
   }
 

@@ -66,7 +66,7 @@ class TvShow {
   int? voteCount;
 
   factory TvShow.fromJson(Map<String, dynamic> json) => TvShow(
-        backdropPath: json["backdrop_path"] ?? "hi",
+        backdropPath: json["backdrop_path"] ?? [''],
         createdBy: List<CreatedBy>.from(
             json["created_by"].map((x) => CreatedBy.fromJson(x))),
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),

@@ -103,7 +103,7 @@ class _TvShowDetailScreenState extends State<TvShowDetailScreen> {
                                       Text(tvShow.episodeRunTime.toString() +
                                           "min"),
                                       Spacer(),
-                                      // Text("   " + convertedDateDE),
+                                      Text("   " + convertedDateDE),
                                       Spacer(),
                                     ],
                                   ),
@@ -143,10 +143,13 @@ class _TvShowDetailScreenState extends State<TvShowDetailScreen> {
                               Spacer(),
                             ],
                           ),
-                          // Positioned(
-                          //   right: 0,
-                          //   child: LikeButton(movie: movie),
-                          // ),
+                          Positioned(
+                            right: 0,
+                            child: LikeButton(
+                              tvShow: tvShow,
+                              passedCategory: "tvshow",
+                            ),
+                          ),
                         ],
                       );
                     } else if (snapshot.hasError) {
