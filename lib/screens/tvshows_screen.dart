@@ -35,16 +35,25 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
         child: Column(
           children: [
             ContentCategoryView(
-                contentToShow: popularTvShows, category: "Popular"),
+              contentToShow: popularTvShows,
+              categoryText: "Popular",
+              passedCategoryforData: "tvshow",
+            ),
             SizedBox(height: 10),
             ContentCategoryView(
-                contentToShow: topRatedTvShows, category: "Top Rated"),
+                contentToShow: topRatedTvShows,
+                categoryText: "Top Rated",
+                passedCategoryforData: "tvshow"),
             SizedBox(height: 10),
             ContentCategoryView(
-                contentToShow: airingTodayTvShows, category: "Airing Today"),
+                contentToShow: airingTodayTvShows,
+                categoryText: "Airing Today",
+                passedCategoryforData: "tvshow"),
             SizedBox(height: 10),
             ContentCategoryView(
-                contentToShow: onAirTvShows, category: "On Air"),
+                contentToShow: onAirTvShows,
+                categoryText: "On Air",
+                passedCategoryforData: "tvshow"),
           ],
         ),
       ),

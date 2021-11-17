@@ -1,6 +1,8 @@
+import 'package:cinexa/config/movie_cart.dart';
 import 'package:cinexa/design/theme_switch.dart';
+import 'package:cinexa/screens/favlist.dart';
 import 'package:cinexa/screens/home_screen.dart';
-import 'package:cinexa/screens/content_detail_screen.dart';
+import 'package:cinexa/screens/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,8 +14,15 @@ void main() async {
       var isDarkTheme = prefs.getBool("darkTheme") ?? false;
 
       return runApp(
-        ChangeNotifierProvider(
-          create: (_) => ThemeSwitchProvider(isDarkTheme),
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => ThemeSwitchProvider(isDarkTheme),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => MovieCart(),
+            ),
+          ],
           child: Cinexa(),
         ),
       );
@@ -33,7 +42,8 @@ class Cinexa extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
-        ContentDetailScreen.routeName: (context) => ContentDetailScreen(),
+        MovieDetailScreen.routeName: (context) => MovieDetailScreen(),
+        FavlistScreen.routeName: (context) => FavlistScreen(),
       },
     );
   }

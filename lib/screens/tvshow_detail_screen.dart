@@ -1,25 +1,29 @@
+import 'package:cinexa/components/like_button.dart';
 import 'package:cinexa/constants.dart';
-import 'package:cinexa/models/movies/movie.dart';
+import 'package:cinexa/models/tvshows/tvshow.dart';
 import 'package:cinexa/service/fetch_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ContentDetailScreen extends StatefulWidget {
+class TvShowDetailScreen extends StatefulWidget {
   static final String routeName = "/moviedetailscreen";
   final int? id;
-  const ContentDetailScreen({Key? key, this.id}) : super(key: key);
+  final String? passedCategoryforData;
+  const TvShowDetailScreen({Key? key, this.id, this.passedCategoryforData})
+      : super(key: key);
 
   @override
-  State<ContentDetailScreen> createState() => _ContentDetailScreenState();
+  State<TvShowDetailScreen> createState() => _TvShowDetailScreenState();
 }
 
-class _ContentDetailScreenState extends State<ContentDetailScreen> {
-  Future<Movie>? moviewithid;
+class _TvShowDetailScreenState extends State<TvShowDetailScreen> {
+  Future<TvShow>? tvshowwithid;
   FetchData? _fetchMovies = FetchData();
 
   @override
   void initState() {
-    moviewithid = _fetchMovies!.fetchMovieDetailsWithID(widget.id!);
+    tvshowwithid = _fetchMovies!.fetchTvShowDetailsWithID(widget.id!);
+    print(widget.id);
     super.initState();
   }
 
@@ -42,17 +46,17 @@ class _ContentDetailScreenState extends State<ContentDetailScreen> {
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
               child: IntrinsicHeight(
-                child: Container(
-                  child: FutureBuilder<Movie>(
-                    future: moviewithid,
-                    builder: (context, snapshot) {
-                      Movie? movie = snapshot.data;
-                      if (snapshot.hasData) {
-                        DateTime date = movie!.releaseDate!.toLocal();
-                        String convertedDateDE =
-                            DateFormat('dd-MM-yyyy').format(date);
-                        return Container(
-                          child: Column(
+                child: FutureBuilder<TvShow>(
+                  future: tvshowwithid,
+                  builder: (context, snapshot) {
+                    TvShow? tvShow = snapshot.data;
+                    if (snapshot.hasData) {
+                      DateTime date = tvShow!.firstAirDate!.toLocal();
+                      String convertedDateDE =
+                          DateFormat('dd-MM-yyyy').format(date);
+                      return Stack(
+                        children: [
+                          Column(
                             children: [
                               ShaderMask(
                                 shaderCallback: (rect) {
@@ -66,14 +70,14 @@ class _ContentDetailScreenState extends State<ContentDetailScreen> {
                                 blendMode: BlendMode.dstIn,
                                 child: Image.network(
                                   "https://image.tmdb.org/t/p/w500/" +
-                                      movie.backdropPath!,
+                                      tvShow.backdropPath!,
                                 ),
                               ),
                               Spacer(),
                               Container(
                                 margin: EdgeInsets.all(kDefaultTextPadding),
                                 child: Text(
-                                  movie.title.toString(),
+                                  tvShow.name.toString(),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
@@ -96,9 +100,10 @@ class _ContentDetailScreenState extends State<ContentDetailScreen> {
                                   Row(
                                     children: [
                                       Spacer(),
-                                      Text(movie.runtime.toString() + "min"),
+                                      Text(tvShow.episodeRunTime.toString() +
+                                          "min"),
                                       Spacer(),
-                                      Text("   " + convertedDateDE),
+                                      // Text("   " + convertedDateDE),
                                       Spacer(),
                                     ],
                                   ),
@@ -107,40 +112,50 @@ class _ContentDetailScreenState extends State<ContentDetailScreen> {
                               Spacer(),
                               Column(
                                 children: [
-                                  Text("Average Rating",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!),
                                   Text(
-                                    movie.voteAverage.toString(),
+                                    "Average Rating",
+                                    style:
+                                        Theme.of(context).textTheme.subtitle1!,
+                                  ),
+                                  Text(
+                                    tvShow.voteAverage.toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline6!
-                                        .copyWith(color: kPrimaryColor),
+                                        .copyWith(
+                                          color: kPrimaryColor,
+                                        ),
                                   ),
                                 ],
                               ),
                               Container(
-                                  margin: EdgeInsets.all(kDefaultTextPadding),
-                                  child: Text(movie.overview.toString(),
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1!)),
+                                margin: EdgeInsets.all(kDefaultTextPadding),
+                                child: Text(
+                                  tvShow.overview.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.subtitle1!,
+                                ),
+                              ),
                               Spacer(),
                               Text(
-                                "Budget: ${movie.budget.toString()}",
+                                "Budget: ${tvShow.type.toString()}",
                               ),
                               Spacer(),
                             ],
                           ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      return Center(child: const CircularProgressIndicator());
-                    },
-                  ),
+                          // Positioned(
+                          //   right: 0,
+                          //   child: LikeButton(movie: movie),
+                          // ),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return Center(
+                      child: const CircularProgressIndicator(),
+                    );
+                  },
                 ),
               ),
             ),

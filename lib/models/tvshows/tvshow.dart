@@ -66,7 +66,7 @@ class TvShow {
   int? voteCount;
 
   factory TvShow.fromJson(Map<String, dynamic> json) => TvShow(
-        backdropPath: json["backdrop_path"],
+        backdropPath: json["backdrop_path"] ?? "hi",
         createdBy: List<CreatedBy>.from(
             json["created_by"].map((x) => CreatedBy.fromJson(x))),
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
@@ -90,7 +90,7 @@ class TvShow {
         originalName: json["original_name"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? "",
         productionCompanies: List<Network>.from(
             json["production_companies"].map((x) => Network.fromJson(x))),
         productionCountries: List<ProductionCountry>.from(

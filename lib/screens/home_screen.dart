@@ -2,6 +2,7 @@ import 'package:cinexa/constants.dart';
 import 'package:cinexa/design/theme_switch.dart';
 import 'package:cinexa/models/movies/movie.dart';
 import 'package:cinexa/models/movies/movie_category.dart';
+import 'package:cinexa/screens/favlist.dart';
 import 'package:cinexa/screens/tvshows_screen.dart';
 import 'package:cinexa/service/fetch_data.dart';
 import 'package:flutter/material.dart';
@@ -69,10 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: Icon(Icons.list),
           label: 'Bookmarks',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.search),
+        //   label: 'Search',
+        // ),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: kPrimaryColor,
@@ -91,6 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       case 1:
         return TvShowsScreen();
+      case 2:
+        return FavlistScreen();
       default:
         return Container();
     }

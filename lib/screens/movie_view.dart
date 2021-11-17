@@ -22,16 +22,28 @@ class MovieView extends StatelessWidget {
       child: Column(
         children: [
           ContentCategoryView(
-              contentToShow: popularMovies!, category: "Popular"),
+            contentToShow: popularMovies!,
+            categoryText: "Popular",
+            passedCategoryforData: "movie",
+          ),
           SizedBox(height: 10),
           ContentCategoryView(
-              contentToShow: topRatedMovies!, category: "Top Rated"),
+            contentToShow: topRatedMovies!,
+            categoryText: "Top Rated",
+            passedCategoryforData: "movie",
+          ),
           SizedBox(height: 10),
           ContentCategoryView(
-              contentToShow: upcomingMovies!, category: "Upcoming"),
+            contentToShow: upcomingMovies!,
+            categoryText: "Upcoming",
+            passedCategoryforData: "movie",
+          ),
           SizedBox(height: 10),
           ContentCategoryView(
-              contentToShow: nowPlayingMovies!, category: "Now Playing"),
+            contentToShow: nowPlayingMovies!,
+            categoryText: "Now Playing",
+            passedCategoryforData: "movie",
+          ),
         ],
       ),
     );

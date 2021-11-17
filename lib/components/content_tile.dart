@@ -1,14 +1,17 @@
-import 'package:cinexa/screens/content_detail_screen.dart';
+import 'package:cinexa/screens/movie_detail_screen.dart';
+import 'package:cinexa/screens/tvshow_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class ContentTile extends StatelessWidget {
   final String posterPath;
   final int id;
+  final String passedCategoryforData;
 
   const ContentTile({
     Key? key,
     required this.posterPath,
     required this.id,
+    required this.passedCategoryforData,
   }) : super(key: key);
 
   @override
@@ -20,9 +23,13 @@ class ContentTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ContentDetailScreen(
-                id: id,
-              ),
+              builder: (context) => passedCategoryforData == "movie"
+                  ? MovieDetailScreen(
+                      id: id,
+                    )
+                  : TvShowDetailScreen(
+                      id: id,
+                    ),
             ),
           );
         },
