@@ -1,16 +1,9 @@
-# cinexa
+# Cinexa
 
-A new Flutter project.
+A new basic App that fetches data from themoviedb.org and displays currently trending movies/tv shows.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_1637833586](https://user-images.githubusercontent.com/38783284/143418300-e2d18312-9579-425b-8fef-28255e374366.png)
+![Screenshot_1637833591](https://user-images.githubusercontent.com/38783284/143418318-2c418703-19d0-4e85-bd17-28647dbd122c.png)
+![Screenshot_1637833594](https://user-images.githubusercontent.com/38783284/143418327-dd0efc8c-0514-454d-9d28-68c6f592bf24.png)
