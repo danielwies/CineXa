@@ -1,6 +1,6 @@
 # Cinexa
 
-A new basic App that fetches data from themoviedb.org and displays currently trending movies/tv shows.
+A simple App that fetches data from themoviedb.org and displays currently trending movies/tv shows.
 
 ## Screenshots
 
